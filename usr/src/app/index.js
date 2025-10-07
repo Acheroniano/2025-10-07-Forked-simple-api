@@ -81,7 +81,6 @@ const getDbParams = () => {
 
             const result = await client.query('SELECT version()')
             const version = result.rows[0].version
-
             await client.end()
 
             const response = { 'message': "Conectado ao banco", 'version': version, 'request_id': i }
@@ -91,6 +90,15 @@ const getDbParams = () => {
             const error = { 'message': 'Erro ao se conectar ao banco', 'request_id': i, 'detail': e.message }
             console.log(error)
             console.log(e)
+
+            // Log environment variables for debugging
+            console.log('Environment Variables:')
+            console.log('DB_HOST:', process.env.DB_HOST)
+            console.log('DB_USER:', process.env.DB_USER)
+            console.log('DB_PASSWORD:', process.env.DB_PASSWORD ? '***SET***' : 'NOT SET')
+            console.log('DB_DATABASE:', process.env.DB_DATABASE)
+            console.log('DB_PORT:', process.env.DB_PORT)
+            console.log('API_PORT:', process.env.API_PORT)
 
             res.status(500);
             res.send(error)
