@@ -88,9 +88,6 @@ const getDbParams = () => {
             res.send(response)
         } catch (e) {
             const error = { 'message': 'Erro ao se conectar ao banco', 'request_id': i, 'detail': e.message }
-            console.log(error)
-            console.log(e)
-
             // Log environment variables for debugging
             console.log('Environment Variables:')
             console.log('DB_HOST:', process.env.DB_HOST)
@@ -100,7 +97,11 @@ const getDbParams = () => {
             console.log('DB_PORT:', process.env.DB_PORT)
             console.log('API_PORT:', process.env.API_PORT)
 
-            res.status(500);
+            console.log(error)
+            console.log(e)
+
+
+            res.status(500);1
             res.send(error)
         }
     })
